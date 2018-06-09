@@ -1,0 +1,90 @@
+%AddItem_container_base {
+   width: 620px;
+   background-color: #f2f2f2;
+   margin: 0 auto;
+}
+::placeholder {
+   color: black;
+   opacity: 1;
+}
+.AddItem_container {
+   height: 65px;
+   @extend %AddItem_container_base;
+   &>input {
+      width: 100%;
+      font-size: 24px;
+      height: 100%;
+      padding-left: 32px;
+	}
+
+}
+
+.AddItem_container2 {
+   @extend %AddItem_container_base;
+   height: 519px;
+   position: relative;
+   .top {
+      padding-left: 32px;
+      height: 76px;
+      border-bottom: 2px solid #c8c8c8;
+      display: flex;
+      align-items: center;
+      input:nth-child(2) {
+         width: 248px;
+         height: 28px;
+         background-color: transparent;
+         border: none;
+         font-size: 24px;
+         padding-left: 14px;
+         outline: none;
+      }
+   }
+   .middle {
+      padding-left: 32px;
+      input {
+         width: 162px;
+         height: 35px;
+      }
+      .file {
+         width: 32px;
+         height: 32px;
+         background-color: #c8c8c8;
+         color: white;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+      h4 {
+         margin: 22px 0 11px 0;
+      }
+      textarea {
+         width: 445px;
+         height: 120px;
+      }
+   }
+   .btn_line {
+      position: absolute;
+      bottom: 0;
+   }
+   %btn_base {
+      width: 310px;
+      height: 60px;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:hover {
+         background-color: #ccc;
+      }
+   }
+   .btnCancel {
+		@extend %btn_base;
+      background-color: #fff;
+      color: #d0021b;
+   }
+   .btnAdd {
+		@extend %btn_base;
+      background-color: #4a90e2;
+      color: white;
+   }
+}

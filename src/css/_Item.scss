@@ -1,0 +1,15 @@
+
+.Item_list{
+   margin-top: 24px;
+}
+%base{
+   width: 620px;
+   height: 102px;
+   background-color:#F2F2F2;
+
+   margin: 0 auto;
+}
+.Item{
+   @extend %base;
+   margin-bottom: 8px;
+}
