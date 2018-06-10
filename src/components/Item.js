@@ -16,6 +16,17 @@ import commentIcon from "@fortawesome/fontawesome-free-regular/faCommentDots";
 
 const Item = observer(
   class Item extends Component {
+     constructor(props){
+        super(props);
+        this.title = React.createRef();
+        this.finished = React.createRef();
+        this.favorite = React.createRef();
+        this.date = React.createRef();
+        this.time = React.createRef();
+        this.file = React.createRef();
+        this.comment = React.createRef();
+
+     }
     state = {
       edit: false
     };
@@ -30,6 +41,10 @@ const Item = observer(
         return { edit: !prevState.edit };
       });
     };
+    handleSave = ()=>{
+       console.log( this.title.current.value);
+       
+    }
     render() {
       if (this.state.edit === false) {
         let itemClassName = this.props.favorite ? "Item favorite" : "Item";
@@ -127,7 +142,13 @@ const Item = observer(
         return (
           <div className="AddItem_container2">
             <div className={this.props.favorite?  "top favorite":"top"}>
-              <div className="checkbox">
+              <div className="checkbox" ref={this.favorite}
+              data-favorite={this.props.favorite}
+              onClick={ ()=>{ 
+              
+              this.favorite.current.dataset.favorite = (this.favorite.current.dataset.favorite === 'true'? 'false': 'true');;
+              
+              }}>
                 {this.props.finished ? (
                   <FontAwesomeIcon
                     icon={check}
@@ -136,7 +157,9 @@ const Item = observer(
                   />
                 ) : null}
               </div>
-              <input type="text" defaultValue={this.props.title} />
+              <input type="text" defaultValue={this.props.title} 
+              ref={this.title}
+              />
               <span
                 className="star"
                 onClick={() => {
@@ -226,7 +249,9 @@ const Item = observer(
               <button onClick={this.handleToggleEdit} className="btnCancel">
                 X Cancel
               </button>
-              <button className="btnAdd">+ Add Task</button>
+              <button className="btnAdd"
+               onClick={this.handleSave}
+              >+ Save</button>
             </div>
           </div>
         );
