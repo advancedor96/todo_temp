@@ -1,15 +1,51 @@
 
 .Item_list{
+   width: 620px;
+   margin: 0 auto;
    margin-top: 24px;
 }
-%base{
-   width: 620px;
+.Item{
    height: 102px;
    background-color:#F2F2F2;
-
-   margin: 0 auto;
-}
-.Item{
-   @extend %base;
+   border-radius: 5px;
    margin-bottom: 8px;
+   position: relative;
+   width: 100%;
+   display: inline-block;
+   span{
+      // display: inline-block;
+   }
+   .first_line{
+      position: relative;
+      margin-top:24px;
+      margin-left:32px;
+      display: flex;
+      align-items: center;
+      .checkbox{
+         min-width: 24px;
+         min-height: 24px;
+         background-color: white;
+      }
+      .title{
+         // position: absolute;
+         // left:16px;
+         // top:0;
+         margin-left: 16px;
+         font-size: 24px;
+         width:248px;
+         height:28px;
+      }
+      .star{
+         width:24px;
+         height:24px;
+         position: absolute;
+         right: 88px;
+      }
+      .pencil{
+         width:24px;
+         height:24px;
+         position: absolute;
+         right: 32px;
+      }
+   }
 }
