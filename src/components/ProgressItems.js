@@ -3,16 +3,16 @@ import _ from 'lodash';
 import Item from './Item';
 import { observer } from 'mobx-react';
 import Appstore from '../stores/Appstore';
-const Items = observer(class Items extends Component {
-	render() {
+const ProgressItems = observer(class ProgressItems extends Component {
+   render() {
 		const Data = Appstore.Data;
+      let resultList = _.filter(Data, ['finished', false]);
+      resultList = _.orderBy(resultList, ['favorite', 'id'], ['desc']);
+      
 
-		// console.log(Data);
-		let resultList = _.orderBy(Data, ['favorite', 'id', 'finished'], ['desc']);
-		
-		let num_left = _.filter(Data, ['finished', false]).length;
-		
-		return (
+      
+		let num_left = resultList.length;
+      return (
 			<div className="Item_list">
 			{
 				_.map(resultList, (o)=>{
@@ -28,10 +28,10 @@ const Items = observer(class Items extends Component {
 							/>
 				})
 			}
-				<p class="hint">{num_left} tasks left</p>
+			   <p class="hint">{num_left} tasks left</p>
 			</div>
-		);
-	}
+      );
+   }
 })
 
-export default Items;
+export default ProgressItems;

@@ -8,9 +8,9 @@ const Navbar = observer(class MyTabs extends React.Component {
 	render() {
 		return (
 			<div className="Navbar">
-				<span className="active">My Task</span>
-				<span>In Progress</span>
-				<span>Completed</span>
+				<span className={Appstore.tab===0? "active": ""} onClick={ ()=>{Appstore.setTab(0);} }>My Task</span>
+				<span className={Appstore.tab===1? "active": ""} onClick={ ()=>{Appstore.setTab(1);} }>In Progress</span>
+				<span className={Appstore.tab===2? "active": ""} onClick={ ()=>{Appstore.setTab(2);} }>Completed</span>
 			</div>
 		);
 	}

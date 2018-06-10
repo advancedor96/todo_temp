@@ -8,15 +8,24 @@ import Navbar from './Navbar';
 import Appstore from '../stores/Appstore';
 import AddItem from './AddItem.js';
 import Items from './Items.js';
-
+import ProgressItems from './ProgressItems';
+import CompletedItems from './CompletedItems';
 const App = observer(class App extends Component {
 
   render() {
+		let result = null;
+		if(Appstore.tab === 0){
+			result = <Items />;
+		}else if(Appstore.tab === 1){
+			result = <ProgressItems />;
+		}else if(Appstore.tab === 2){
+			result = <CompletedItems />;
+		}
     return (
 			<div className="container">	
 				<Navbar />
 				<AddItem />
-				<Items />
+				{result}
 			</div>
 	 
     );
