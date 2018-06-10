@@ -4,7 +4,7 @@ import _ from 'lodash';
 const Data = [
 	{
 		id: 0,
-		deadline_date:'5/14',
+		deadline_date:'0001-05-14',
 		deadline_time:'09:00',
 		title:'第一筆',
 		file: '',
@@ -24,7 +24,7 @@ const Data = [
 	},
 	{
 		id: 2,
-		deadline_date:'5/14',
+		deadline_date:'0023-05-14',
 		deadline_time:'09:00',
 		title:'第3筆',
 		file: '',
@@ -41,13 +41,23 @@ var Appstore = observable({
 });
 Appstore.setFinishOfData = action( function (data_id){
 	let target = _.find(Appstore.Data, o=>o.id === data_id);
-	target.finished = !target.finished;
+	if(target === undefined){
+		return false;
+	}else{
+		target.finished = !target.finished;
+		return true;
+	}
 	
 })
 
 Appstore.toogleFavorite = action( function (data_id){
 	let target = _.find(Appstore.Data, o=>o.id === data_id);
-	target.favorite = !target.favorite;
+	if(target === undefined){
+		return false;
+	}else{
+		target.favorite = !target.favorite;
+		return true;
+	}
 	
 })
 Appstore.addItem = action( (title, date, time, file, comment, finished, favorite)=>{
@@ -63,6 +73,23 @@ Appstore.addItem = action( (title, date, time, file, comment, finished, favorite
 	}
 	Appstore.Data.push(newObj);
 	return true;
+})
+
+Appstore.updateItem = action( (Data_id, title, date, time, file, comment, finished, favorite)=>{
+
+	let target = _.find(Appstore.Data, o=>o.id === Data_id);
+	if(target === undefined){
+		return false;
+	}else{
+		target.title = title;
+		target.deadline_date = date;
+		target.deadline_time = time;
+		target.file = file;
+		target.comment = comment;
+		target.finished = finished;
+		target.favorite = favorite;
+		return true;
+	}
 })
 
 

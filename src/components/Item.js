@@ -16,19 +16,16 @@ import commentIcon from "@fortawesome/fontawesome-free-regular/faCommentDots";
 
 const Item = observer(
   class Item extends Component {
-     constructor(props){
-        super(props);
-        this.title = React.createRef();
-        this.finished = React.createRef();
-        this.favorite = React.createRef();
-        this.date = React.createRef();
-        this.time = React.createRef();
-        this.file = React.createRef();
-        this.comment = React.createRef();
 
-     }
     state = {
-      edit: false
+      edit: false,
+      title: this.props.title,
+      finished: this.props.finished,
+      favorite:  this.props.favorite,
+      date:  this.props.deadline_date,
+      time:  this.props.deadline_time,
+      file:  this.props.file,
+      comment:  this.props.comment
     };
     handleToggleFinish = id => {
       Appstore.setFinishOfData(id);
@@ -42,8 +39,21 @@ const Item = observer(
       });
     };
     handleSave = ()=>{
-       console.log( this.title.current.value);
-       
+       let result = Appstore.updateItem(this.props.id,
+         this.state.title,
+         this.state.date,
+         this.state.time,
+         this.state.file,
+         this.state.comment,
+         this.state.finished,
+         this.state.favorite
+      );
+      if(result){
+         this.setState({edit: false});
+      }else{
+         alert('更新失敗');
+      }
+
     }
     render() {
       if (this.state.edit === false) {
@@ -68,7 +78,7 @@ const Item = observer(
               <span
                 className={this.props.finished ? "title finished" : "title"}
               >
-                {this.props.title}
+                {this.state.title}
               </span>
               <span
                 className="star"
@@ -142,14 +152,13 @@ const Item = observer(
         return (
           <div className="AddItem_container2">
             <div className={this.props.favorite?  "top favorite":"top"}>
-              <div className="checkbox" ref={this.favorite}
-              data-favorite={this.props.favorite}
-              onClick={ ()=>{ 
-              
-              this.favorite.current.dataset.favorite = (this.favorite.current.dataset.favorite === 'true'? 'false': 'true');;
+              <div className="checkbox" 
+              onClick={ ()=>{ this.setState( (prevState)=>{
+                 return {finished: !prevState.finished}
+              })
               
               }}>
-                {this.props.finished ? (
+                {this.state.finished ? (
                   <FontAwesomeIcon
                     icon={check}
                     size="2x"
@@ -157,16 +166,18 @@ const Item = observer(
                   />
                 ) : null}
               </div>
-              <input type="text" defaultValue={this.props.title} 
-              ref={this.title}
+              <input type="text" defaultValue={this.state.title} onChange={(e)=>{this.setState({title: e.target.value})}}
+              
               />
               <span
                 className="star"
-                onClick={() => {
-                  this.handleToggleFav(this.props.id);
-                }}
+                onClick={ ()=>{ this.setState( (prevState)=>{
+                  return {favorite: !prevState.favorite}
+               })
+               
+               }}
               >
-                {this.props.favorite ? (
+                {this.state.favorite ? (
                   <FontAwesomeIcon
                     icon={solid_star}
                     size="2x"
@@ -207,8 +218,13 @@ const Item = observer(
                   <span>Deadline</span>
                 </div>
                 <div className="content">
-                  <input type="date" defaultValue={this.props.deadline_date} />
-                  <input type="time" defaultValue={this.props.deadline_time} />
+                  <input type="date" defaultValue={this.state.date}
+                   onChange={(e)=>{this.setState({date: e.target.value})}}
+
+                  />
+                  <input type="time" defaultValue={this.state.time} 
+                  onChange={(e)=>{this.setState({time: e.target.value})}}
+                  />
                 </div>
               </div>
 
@@ -222,7 +238,7 @@ const Item = observer(
                   <span>File</span>
                 </div>
                 <div className="content">
-                  <div className="file">+ {this.props.file}</div>
+                  <div className="file">+ {this.state.file}</div>
                 </div>
               </div>
               <div>
@@ -238,7 +254,8 @@ const Item = observer(
                   <textarea
                     className="textarea"
                     placeholder="Type your memo here..."
-                    defaultValue={this.props.comment}
+                    defaultValue={this.state.comment}
+                    onChange={(e)=>{this.setState({comment: e.target.value})}}
                   >
                     
                   </textarea>
