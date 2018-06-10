@@ -50,6 +50,20 @@ Appstore.toogleFavorite = action( function (data_id){
 	target.favorite = !target.favorite;
 	
 })
+Appstore.addItem = action( (title, date, time, file, comment, finished, favorite)=>{
+	let newObj = {
+		id: new Date(),
+		deadline_date:date,
+		deadline_time:time,
+		title:title,
+		file: file,
+		comment: comment,
+		finished: finished,
+		favorite: favorite
+	}
+	Appstore.Data.push(newObj);
+	return true;
+})
 
 
 Appstore.setTab = action(function reset(value) {

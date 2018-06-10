@@ -9,21 +9,73 @@ import empty_star from '@fortawesome/fontawesome-free-regular/faStar'
 import calendar from '@fortawesome/fontawesome-free-regular/faCalendarAlt'
 import file from '@fortawesome/fontawesome-free-regular/faFile'
 import commentIcon from '@fortawesome/fontawesome-free-regular/faCommentDots'
+import Appstore from '../stores/Appstore';
 
 
 class AddItem extends Component {
 	state = {
 		edit: false,
 		favorite: false,
+		title: '',
+		finished: false,
+		date: '',
+		time: '',
+		file: '',
+		comment: '',
+
 	}
 	handleEdit = (newValue)=>{
 		this.setState({ edit: newValue});
+	}
+	handleChangeTitle = (e)=>{
+		this.setState({title : e.target.value})
+	}
+	handleToggleFinish = ()=>{
+		this.setState( (prevState)=>{
+			return {finished: !prevState.finished}
+		});
 	}
 	handleToggleFavorite = ()=>{
 		this.setState( (prevState)=>{
 			return {favorite: !prevState.favorite}
 		});
 	}
+	handleChangeDate = (e)=>{
+		this.setState({date : e.target.value})
+	}
+	handleChangeTime = (e)=>{
+		this.setState({time : e.target.value})
+	}
+	handleChangeComment = (e)=>{
+		this.setState({comment : e.target.value})
+	}
+
+	handleAddTask = ()=>{
+		let result = Appstore.addItem(
+			this.state.title,
+			this.state.date, 
+			this.state.time, 
+			this.state.file, 
+			this.state.comment, 
+			this.state.finished, 
+			this.state.favorite
+		);
+		if(result === true){
+			this.setState({
+				edit: false,
+				favorite: false,
+				title: '',
+				finished: false,
+				date: '',
+				time: '',
+				file: '',
+				comment: '',
+			})
+		}
+	}
+
+	
+
 	render() {
 		if(this.state.edit === false){
 			return (
@@ -35,11 +87,17 @@ class AddItem extends Component {
 		return (
 			<div className="AddItem_container2">
 				<div className="top">
-					<div className="checkbox">
-					
-						{/* <FontAwesomeIcon icon={check} size="2x" style={{fontSize:'19px'}}/> */}
+					<div className="checkbox"
+                onClick={this.handleToggleFinish}>
+						{this.state.finished ? (
+							<FontAwesomeIcon
+							icon={check}
+							size="2x"
+							style={{ fontSize: "19px" }}
+							/>
+						) : null}
 					</div>
-					<input type='text' placeholder="Type something here..." />
+					<input type='text' placeholder="Type something here..." defaultValue={this.state.title} onChange={this.handleChangeTitle}/>
         			<FontAwesomeIcon icon={solid_star} size="2x"  className={ this.state.favorite? "star full_star" : "star"} style={{fontSize:'24px'}}
 					  onClick={this.handleToggleFavorite}
 					  />
@@ -54,8 +112,9 @@ class AddItem extends Component {
 							<span>Deadline</span>
 						</div>
 						<div className="content">
-							<input type='date' />
-							<input type='time'/>
+							<input type='date' onChange={this.handleChangeDate} />
+							<input type='time' onChange={this.handleChangeTime} 
+							/>
 						</div>
 					</div>
 
@@ -77,6 +136,8 @@ class AddItem extends Component {
 						<div className="content">
 							<textarea className="textarea"
 								placeholder="Type your memo here..."
+								defaultValue={this.state.comment}
+								onChange={this.handleChangeComment}
 							></textarea>
 						</div>
 
@@ -92,6 +153,7 @@ class AddItem extends Component {
 					</button>
 					<button
 						className="btnAdd"
+						onClick={this.handleAddTask}
 					>+ Add Task</button>
 				</div>
 			</div>

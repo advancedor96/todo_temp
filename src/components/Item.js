@@ -126,7 +126,7 @@ const Item = observer(
         /* 打開編輯模式*/
         return (
           <div className="AddItem_container2">
-            <div className={ "top " + "favorite"}>
+            <div className={this.props.favorite?  "top favorite":"top"}>
               <div className="checkbox">
                 {this.props.finished ? (
                   <FontAwesomeIcon
