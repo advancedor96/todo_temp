@@ -51,7 +51,9 @@
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3"
   },
+  "homepage": ".",
   "scripts": {
+    "deploy": "gh-pages -d dist",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
@@ -104,6 +106,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "gh-pages": "^1.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.3"
   }
