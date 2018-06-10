@@ -1,0 +1,35 @@
+/***********************************************************
+ *                         NAVBAR                          *
+ ***********************************************************/
+ @import '_Navbar';
+ @import '_AddItem_container';
+ @import '_Item';
+body{
+    font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    overflow-y: scroll;
+}
+ .Navbar{
+	background: #4A90E2;
+	height: 76px;
+	text-align: center;
+   overflow: hidden;
+   
+   span{
+      width: 220px;
+      background-color: transparent;
+       font-size: 24px;
+       border: none;
+       height: 100%;
+       display: inline-block;
+       text-align: center;
+       line-height: 76px;
+       cursor: pointer;
+   };
+   .active{
+      border-bottom: 5px solid #00408B;
+      color: white;
+      transition: all 0.5s;
+      
+   }
+
+}
