@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { observer } from 'mobx-react';
+import Appstore from '../stores/Appstore';
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import solid_star from "@fortawesome/fontawesome-free-solid/faStar";
 import pencil from "@fortawesome/fontawesome-free-solid/faPencilAlt";
@@ -12,12 +14,21 @@ import calendar from "@fortawesome/fontawesome-free-regular/faCalendarAlt";
 import file from "@fortawesome/fontawesome-free-regular/faFile";
 import commentIcon from "@fortawesome/fontawesome-free-regular/faCommentDots";
 
-class Item extends Component {
+const Item = observer(class Item extends Component {
+   handleToggleFinish = (id)=>{
+      Appstore.setFinishOfData(id);
+   }
+   handleToggleFav = (id)=>{
+      Appstore.toogleFavorite(id);
+   }
   render() {
+     let itemClassName = this.props.favorite ? "Item favorite": "Item";
     return (
-      <div className="Item">
+      <div className={itemClassName}>
         <div className="first_line">
-          <span className="checkbox">
+          <span className="checkbox"
+            onClick={ ()=>{   this.handleToggleFinish(this.props.id)}}
+          >
             {this.props.finished ? (
               <FontAwesomeIcon
                 icon={check}
@@ -26,18 +37,22 @@ class Item extends Component {
               />
             ) : null}
           </span>
-          <span className="title">{this.props.title}</span>
-          <span className="star">
+          <span className={this.props.finished? "title finished" : "title"}>{this.props.title}</span>
+          <span className="star"
+            onClick={ ()=>{   this.handleToggleFav(this.props.id)}}
+          >
             {this.props.favorite ? (
               <FontAwesomeIcon
                 icon={solid_star}
                 size="2x"
+                className="full_star"
                 style={{ fontSize: "24px" }}
               />
             ) : (
               <FontAwesomeIcon
                 icon={empty_star}
                 size="2x"
+                className="empty_star"
                 style={{ fontSize: "24px" }}
               />
             )}
@@ -61,24 +76,32 @@ class Item extends Component {
              />{this.props.deadline_date}
            </span> : null
         }
-          <span className="file">
-            <FontAwesomeIcon
-              icon={file}
-              size="2x"
-              style={{ fontSize: "16px" }}
-            />
-          </span>
-          <span className="comment">
-            <FontAwesomeIcon
-              icon={commentIcon}
-              size="2x"
-              style={{ fontSize: "16px" }}
-            />
-          </span>
+        {
+           this.props.file.length!==0? 
+           <span className="file">
+           <FontAwesomeIcon
+             icon={file}
+             size="2x"
+             style={{ fontSize: "16px" }}
+           />
+         </span>: null
+        }
+        {
+           this.props.comment.length!==0? 
+           <span className="comment">
+           <FontAwesomeIcon
+             icon={commentIcon}
+             size="2x"
+             style={{ fontSize: "16px" }}
+           />
+         </span>: null
+        }
+
+
         </div>
       </div>
     );
   }
-}
+});
 
 export default Item;
