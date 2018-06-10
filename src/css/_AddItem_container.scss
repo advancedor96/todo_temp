@@ -5,7 +5,8 @@
 }
 
 ::placeholder {
-  color: black;
+  color: #C8C8C8;
+
   opacity: 1;
 }
 
@@ -14,6 +15,7 @@
   position: relative;
   @extend %AddItem_container_base;
   & > input {
+    font-family: inherit;
     width: 100%;
     font-size: 24px;
     height: 100%;
