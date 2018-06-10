@@ -6,6 +6,7 @@
  @import '_Item';
 body{
     font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    overflow-y: scroll;
 }
  .Navbar{
 	background: #4A90E2;

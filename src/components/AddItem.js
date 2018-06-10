@@ -10,6 +10,7 @@ import calendar from '@fortawesome/fontawesome-free-regular/faCalendarAlt'
 import file from '@fortawesome/fontawesome-free-regular/faFile'
 import commentIcon from '@fortawesome/fontawesome-free-regular/faCommentDots'
 import Appstore from '../stores/Appstore';
+import anime from 'animejs'
 
 
 class AddItem extends Component {
@@ -23,6 +24,12 @@ class AddItem extends Component {
 		file: '',
 		comment: '',
 
+		opacity:0,
+
+	}
+	handleClickEdit = ()=>{
+		this.handleEdit(true);
+		this.setState({opacity : 1})
 	}
 	handleEdit = (newValue)=>{
 		this.setState({ edit: newValue});
@@ -80,7 +87,7 @@ class AddItem extends Component {
 		if(this.state.edit === false){
 			return (
 				<div className="AddItem_container">
-					<input type='text' placeholder="+ Add Task" onClick={()=>{ this.handleEdit(true); }}/>
+					<input type='text' placeholder="+ Add Task" onClick={this.handleClickEdit}/>
 				</div>
 			)
 		}
@@ -145,7 +152,7 @@ class AddItem extends Component {
 						
 					</div>
 				</div>
-				<div className="btn_line">
+				<div className="btn_line" style={{ opacity: this.state.opacity}}>
 					<button 
 						onClick={()=>{ this.handleEdit(false); }}
 						className="btnCancel"
