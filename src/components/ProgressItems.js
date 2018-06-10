@@ -28,7 +28,7 @@ const ProgressItems = observer(class ProgressItems extends Component {
 							/>
 				})
 			}
-			   <p class="hint">{num_left} tasks left</p>
+			   <p className="hint">{num_left} tasks left</p>
 			</div>
       );
    }

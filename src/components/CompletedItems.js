@@ -27,7 +27,7 @@ const CompletedItems = observer(class CompletedItems extends Component {
 							/>
 				})
 			}
-			   <p class="hint">{num_left} tasks complete</p>
+			   <p className="hint">{num_left} tasks complete</p>
 			</div>
       );
    }

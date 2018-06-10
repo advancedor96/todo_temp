@@ -1,4 +1,4 @@
-import { decorate, observable, computed, action } from "mobx";
+import {  observable,  action } from "mobx";
 import _ from 'lodash';
 const Data = [
 	{
