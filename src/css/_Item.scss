@@ -12,9 +12,6 @@
    position: relative;
    width: 100%;
    display: inline-block;
-   span{
-      // display: inline-block;
-   }
    .first_line{
       position: relative;
       margin-top:24px;
@@ -46,6 +43,16 @@
          height:24px;
          position: absolute;
          right: 32px;
+      }
+   }
+   .second_line{
+      margin-top: 15px;
+      margin-left: 72px;
+      .date{
+         margin-right: 16px;
+      }
+      .file{
+         margin-right: 16px;
       }
    }
 }

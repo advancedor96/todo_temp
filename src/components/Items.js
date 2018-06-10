@@ -11,7 +11,7 @@ class Items extends Component {
 			{
 				_.map(Data, (o)=>{
 					return <Item key={o.id}
-								deadline_data={o.deadline_data}
+								deadline_date={o.deadline_date}
 								deadline_time={o.deadline_time}
 								title={o.title}
 								file={o.file}
