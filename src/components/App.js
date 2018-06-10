@@ -10,12 +10,7 @@ import AddItem from './AddItem.js';
 import Items from './Items.js';
 
 const App = observer(class App extends Component {
-	state = {
-		showAddItem: false,
-	}
-	handleClickAddItem = (value)=>{
-		this.setState({showAddItem: value});
-	}
+
   render() {
     return (
 			<div className="container">	
