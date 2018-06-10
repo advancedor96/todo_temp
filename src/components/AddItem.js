@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faStar from '@fortawesome/fontawesome-free-solid/faStar'
-import faStar_regular from '@fortawesome/fontawesome-free-regular/faStar'
+import solid_star from '@fortawesome/fontawesome-free-solid/faStar'
+import pencil from '@fortawesome/fontawesome-free-solid/faPencilAlt'
+import check from '@fortawesome/fontawesome-free-solid/faCheck'
 
-// import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-// import faCoffee from '@fortawesome/fontawesome-free-solid/faCoffee'
+import empty_star from '@fortawesome/fontawesome-free-regular/faStar'
+import calendar from '@fortawesome/fontawesome-free-regular/faCalendarAlt'
+import file from '@fortawesome/fontawesome-free-regular/faFile'
+import commentIcon from '@fortawesome/fontawesome-free-regular/faCommentDots'
 
 
 class AddItem extends Component {
@@ -20,25 +23,49 @@ class AddItem extends Component {
 		return (
 			<div className="AddItem_container2">
 				<div className="top">
-					<input type='checkbox' />
+					<div className="checkbox">
+					
+						{/* <FontAwesomeIcon icon={check} size="2x" style={{fontSize:'19px'}}/> */}
+					</div>
 					<input type='text' placeholder="Type something here..." />
-					<div className="star">
-        			<FontAwesomeIcon icon={faStar_regular} /></div>
-					<div><i className="far fa-pen"></i></div>
+        			<FontAwesomeIcon icon={solid_star} size="2x"  className="star" style={{fontSize:'24px'}}/>
+					<FontAwesomeIcon icon={pencil} size="2x" className="pencil" style={{fontSize:'24px'}}/>
 				</div>
 				<div className="middle">
 					<div>
-						<h4>Deadline</h4>
-						<input type='date' />
-						<input type='time'/>
+						<div className="title">
+							<FontAwesomeIcon icon={calendar} size="2x"  className="calendar" style={{fontSize:'15px'}}/>
+							<span>Deadline</span>
+						</div>
+						<div className="content">
+							<input type='date' />
+							<input type='time'/>
+						</div>
+					</div>
+
+					<div>
+						<div className="title">
+							<FontAwesomeIcon icon={file} size="2x"  style={{fontSize:'15px'}}/>
+							<span>File</span>
+						</div>
+						<div className="content">
+							<div className="file">+</div>
+						</div>
+
 					</div>
 					<div>
-						<h4>File</h4>
-						<div className="file">+</div>
-					</div>
-					<div>
-						<h4>Comment</h4>
-						<textarea></textarea>
+						<div className="title">
+							<FontAwesomeIcon icon={commentIcon} size="2x"  style={{fontSize:'15px'}}/>
+							<span>Comment</span>
+						</div>
+						<div className="content">
+							<textarea className="textarea"
+								placeholder="Type your memo here..."
+							></textarea>
+						</div>
+
+
+						
 					</div>
 				</div>
 				<div className="btn_line">
