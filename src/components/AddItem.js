@@ -12,11 +12,23 @@ import commentIcon from '@fortawesome/fontawesome-free-regular/faCommentDots'
 
 
 class AddItem extends Component {
+	state = {
+		edit: false,
+		favorite: false,
+	}
+	handleEdit = (newValue)=>{
+		this.setState({ edit: newValue});
+	}
+	handleToggleFavorite = ()=>{
+		this.setState( (prevState)=>{
+			return {favorite: !prevState.favorite}
+		});
+	}
 	render() {
-		if(this.props.show === false){
+		if(this.state.edit === false){
 			return (
 				<div className="AddItem_container">
-					<input type='text' placeholder="+ Add Task" onClick={()=>{ this.props.setClick(true); }}/>
+					<input type='text' placeholder="+ Add Task" onClick={()=>{ this.handleEdit(true); }}/>
 				</div>
 			)
 		}
@@ -28,8 +40,12 @@ class AddItem extends Component {
 						{/* <FontAwesomeIcon icon={check} size="2x" style={{fontSize:'19px'}}/> */}
 					</div>
 					<input type='text' placeholder="Type something here..." />
-        			<FontAwesomeIcon icon={solid_star} size="2x"  className="star" style={{fontSize:'24px'}}/>
-					<FontAwesomeIcon icon={pencil} size="2x" className="pencil" style={{fontSize:'24px'}}/>
+        			<FontAwesomeIcon icon={solid_star} size="2x"  className={ this.state.favorite? "star full_star" : "star"} style={{fontSize:'24px'}}
+					  onClick={this.handleToggleFavorite}
+					  />
+					<FontAwesomeIcon icon={pencil} size="2x" className="pencil" style={{fontSize:'24px'}} 
+					onClick={()=>{ this.handleEdit(false); }}
+					/>
 				</div>
 				<div className="middle">
 					<div>
@@ -70,7 +86,7 @@ class AddItem extends Component {
 				</div>
 				<div className="btn_line">
 					<button 
-						onClick={()=>{ this.props.setClick(false); }}
+						onClick={()=>{ this.handleEdit(false); }}
 						className="btnCancel"
 					>X Cancel
 					</button>

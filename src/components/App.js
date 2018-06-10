@@ -11,7 +11,7 @@ import Items from './Items.js';
 
 const App = observer(class App extends Component {
 	state = {
-		showAddItem: true,
+		showAddItem: false,
 	}
 	handleClickAddItem = (value)=>{
 		this.setState({showAddItem: value});
@@ -20,9 +20,7 @@ const App = observer(class App extends Component {
     return (
 			<div className="container">	
 				<Navbar />
-				<AddItem show={this.state.showAddItem} 
-					setClick={this.handleClickAddItem}
-				/>
+				<AddItem />
 				<Items />
 			</div>
 	 

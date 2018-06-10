@@ -29,18 +29,24 @@
   @extend %AddItem_container_base;
   height: 519px;
   position: relative;
+  margin-bottom: 24px;
   .top {
     padding-left: 32px;
     height: 76px;
     border-bottom: 2px solid #c8c8c8;
     display: flex;
     align-items: center;
+
+    .full_star{
+      color: #F5A623;
+   }
     .checkbox {
       position: absolute;
       left: 32px;
       width: 24px;
       height: 24px;
       background-color: white;
+      cursor: pointer;
     }
     input {
       position: absolute;
@@ -51,17 +57,22 @@
       background-color: transparent;
       border: none;
       font-size: 24px;
-      padding-left: 14px;
+      // padding-left: 14px;
       outline: none;
     }
     .star {
       position: absolute;
       right: 88px;
+      cursor: pointer;
+      .full_star{
+        color: #F5A623;
+     }
     }
     .pencil {
       position: absolute;
       right: 32px;
       color: #4a90e2;
+      cursor: pointer;
     }
   }
   .middle {
